@@ -9,8 +9,6 @@
 &nbsp;|&nbsp;
 
 <a href="/delete_director/<%= @the_director.id %>" class="btn btn-block btn-outline-secondary">
-  Delete director
-  <small>(Building this link is not required. It's an optional stretch goal; but, you have the tools if you want to give it a try.)</small>
 </a>
 
 <hr>
@@ -41,7 +39,7 @@
     Image
   </dt>
   <dd>
-    <%= @the_director.image %>
+    <img src="http://robohash.org/<%=@the_director.image%>">
   </dd>
 
   <dt>
@@ -58,6 +56,8 @@
     <%= time_ago_in_words(@the_director.updated_at) %> ago
   </dd>
 </dl>
+
+<h2>Filmography</h2>
 
 <table border="1">
   <tr>
@@ -85,21 +85,22 @@
     </th>
   </tr>
 
+<% @filmography.each do |this| %>
   <tr>
     <td>
-      6
+      <%= this.id %>
     </td>
 
     <td>
-      <img src="https://image.tmdb.org/t/p/w500/t7xhP8SQTVanzecvn1oQRVWCXTI.jpg" style="width:250px;">
+      <img src="<%=this.image%>">
     </td>
 
     <td>
-      Schindler&#39;s List
+      <%= this.title %>
     </td>
 
     <td>
-      1993
+      <%= this.year %>
     </td>
 
     <td>
@@ -107,11 +108,12 @@
     </td>
 
     <td>
-      <a href="/movies/6">
+      <a href="/movies/<%= this.id %>">
         Show details
       </a>
     </td>
   </tr>
+<%end%>
 </table>
 
   </body>
