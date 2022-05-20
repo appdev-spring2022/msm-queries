@@ -54,27 +54,35 @@
   </dd>
 </dl>
 
-<% @filmography.each do |this| %>
-  <tr>
-    <td>
-      <%= this.title %>
-    </td>
+<h2>Filmography</h2>
 
-    <td>
-      <%= this.year %>
-    </td>
+<table border="1">
+  <% @the_character_list.each do |character| %>
+  <% this_movie = Movie.where(:id => character.movie_id).at(0) %>
+    <tr>
+      <td>
+        <%= this_movie.title %>
+      </td>
 
-    <td>
-      <%= this.director %>
-    </td>
+      <td>
+        <%= this_movie.year %>
+      </td>
 
-    <td>
-      <a href="/movies/<%= this.id %>">
-        Show details
-      </a>
-    </td>
-  </tr>
-<%end%>
+      <td>
+        <%= Director.where({:id => this_movie.director_id}).at(0).name %>
+      </td>
+
+      <td>
+        <%= character.name %>
+      </td>
+
+      <td>
+        <a href="/movies/<%= this_movie.id %>">
+          Show details
+        </a>
+      </td>
+    </tr>
+  <%end%>
 </table>
 
   </body>
